@@ -1,5 +1,5 @@
 #lang sicp
-(#%require "../tools/functions.rkt" "functions_2_3_2.rkt" "sum.rkt" "product.rkt" "exponent.rkt")
+(#%require "../tools/functions.rkt" "functions_2_57.rkt" "sum.rkt" "product.rkt" "exponent.rkt")
 
 
 (define (deriv exp var)
@@ -23,4 +23,4 @@
          (error "unknown expression type: DERIV" exp))))
 
 
-(deriv '(* x y (+ x 3))'x)
+(deriv '(+ (* 3 x) (** x 2) (* 4 x) (** x 2)) 'x)

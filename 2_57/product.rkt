@@ -1,6 +1,6 @@
 #lang sicp
 (#%require "../tools/functions.rkt")
-(#%require "functions_2_3_2.rkt")
+(#%require "functions_2_57.rkt")
 
 (#%provide product? multiplier multiplicand make-product)
 
