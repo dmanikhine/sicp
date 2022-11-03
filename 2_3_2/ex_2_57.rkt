@@ -1,5 +1,6 @@
 #lang sicp
 (#%require "../tools/functions.rkt")
+
 ;(define (non-number? x) (not (number? x)))
 (define (variable? x) (symbol? x))
 (define (same-variable? v1 v2)
