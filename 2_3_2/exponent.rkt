@@ -1,9 +1,6 @@
 #lang sicp
-(#%require "../tools/functions_2_3_2.rkt")
-(#%provide exponentiation?)
-(#%provide base)
-(#%provide exponent)
-(#%provide make-exponentiation)
+(#%require "functions_2_3_2.rkt")
+(#%provide exponentiation? base exponent make-exponentiation)
 
 
 (define (exponentiation? x) (and (pair? x) (eq? (car x) '**)))

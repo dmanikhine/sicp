@@ -1,5 +1,5 @@
 #lang sicp
-(#%require "../tools/functions_2_3_2.rkt")
+(#%require "functions_2_3_2.rkt")
 
 (#%provide multiplier)
 (#%provide multiplicand)

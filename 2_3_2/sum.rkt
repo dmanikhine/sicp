@@ -1,6 +1,6 @@
 #lang sicp
 (#%require "../tools/functions.rkt")
-(#%require "../tools/functions_2_3_2.rkt")
+(#%require "functions_2_3_2.rkt")
 (#%provide addend)
 (#%provide augend)
 (#%provide make-sum sum?)
@@ -22,4 +22,3 @@
           ((= 0 const) (make-sum-list vars)) 
           (else (make-sum-list (cons const vars))))))
 
-(make-sum 'x 'y 3 6 7)
