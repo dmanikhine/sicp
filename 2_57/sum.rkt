@@ -1,9 +1,10 @@
 #lang sicp
-(#%require "../tools/functions.rkt")
-(#%require "functions_2_57.rkt")
+(#%require "../tools/functions.rkt" "functions_2_57.rkt")
+(#%provide sum?)
 (#%provide addend)
 (#%provide augend)
-(#%provide make-sum sum?)
+(#%provide make-sum)
+
 
 
 (define (sum? x) (and (pair? x) (eq? (car x) '+)))
