@@ -1,7 +1,8 @@
 #lang sicp
+
 (#%require "product.rkt" "../tools/functions.rkt")
 
-(define test '*)
+(define test '(4 * x))
 
-(pair? test)
-
+(multiplier test)
+(multiplicand test)

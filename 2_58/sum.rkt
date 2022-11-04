@@ -3,27 +3,15 @@
 (#%provide addend augend sum? make-sum)
 
 
-(define (addend x)
-  (define (iter result tail)
-    (if (eq? '+ (car tail))
-        (if (null? (cdr result)) (car result)
-            result)
-        (iter (append result (list (car tail))) (cdr tail))))   
-  (iter '() x))
+(define (addend s)
+  (let ((before-plus (take-while (lambda (x) ( not (eq? x '+))) s)))
+    (remove-parenthesis before-plus)))
 
+(define (augend s)
+  (let ((after-plus (cdr (memq '+ s))))
+  (remove-parenthesis after-plus)))
 
-(define (augend x)
-  (let ((tail (memq '+ x)))
-  (if (null? (cddr tail)) (cadr tail)
-      (cdr tail))))
-             
-
-
-  ;(if (eq? '+ (car x))
-  ;     (if (null? (cddr x)) (cadr x)
-  ;          (cdr x))       
-  ;    (augend (cdr x))))
-
+  
 
 (define (sum? x)
   (pair?
