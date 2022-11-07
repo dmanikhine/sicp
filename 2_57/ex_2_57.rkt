@@ -23,4 +23,4 @@
          (error "unknown expression type: DERIV" exp))))
 
 
-(deriv '(+ (* 3 x) (** x 2) (* 4 x) (** x 2)) 'x)
+(deriv '(+ (* 3 x) (* 3 x) (** x 2) (* 4 x) (** x 2)) 'x)

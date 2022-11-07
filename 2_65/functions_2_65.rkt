@@ -2,8 +2,7 @@
 (define (entry tree) (car tree))
 (define (left-branch tree) (cadr tree))
 (define (right-branch tree) (caddr tree))
-(define (make-tree entry left right)
-(list entry left right))
+(define (make-tree entry left right) list entry left right))
 
 
 (define (element-of-set? x set)
@@ -22,6 +21,18 @@
         ((> x (entry set))
          (make-tree (entry set) (left-branch set)
                     (adjoin-set x (right-branch set))))))
+
+
+
+
+
+;(define (intersection-set set1 set2)
+;  (defint (iter rslt set1 set)
+;    (cond ((null? set1) rslt)
+;          ((null? set2) rslt)
+;          ((element-of-set? (entry)
+  
+  
 
 
 
