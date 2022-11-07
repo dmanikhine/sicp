@@ -1,8 +1,9 @@
 #lang sicp
+(#%provide tree->list list->tree)
 (define (entry tree) (car tree))
 (define (left-branch tree) (cadr tree))
 (define (right-branch tree) (caddr tree))
-(define (make-tree entry left right) list entry left right))
+(define (make-tree entry left right) (list entry left right))
 
 
 (define (element-of-set? x set)
@@ -23,16 +24,17 @@
                     (adjoin-set x (right-branch set))))))
 
 
+(define (tree->list tree)
+  (define (copy-to-list tree result-list)
+    (if (null? tree)
+        result-list
+        (copy-to-list (left-branch tree)
+                      (cons (entry tree)
+                            (copy-to-list
+                             (right-branch tree)
+                             result-list)))))
+  (copy-to-list tree '()))
 
-
-
-;(define (intersection-set set1 set2)
-;  (defint (iter rslt set1 set)
-;    (cond ((null? set1) rslt)
-;          ((null? set2) rslt)
-;          ((element-of-set? (entry)
-  
-  
 
 
 
