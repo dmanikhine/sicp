@@ -1,6 +1,5 @@
 #lang sicp
-(#%provide accumulate)
-(#%provide filter)
+(#%provide accumulate filter element-of-set?)
 
 
 (define (accumulate op initial sequence)
@@ -15,3 +14,8 @@
          (cons (car sequence)
                (filter predicate (cdr sequence))))
         (else (filter predicate (cdr sequence)))))
+
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+        ((equal? x (car set)) true)
+        (else (element-of-set? x (cdr set)))))
