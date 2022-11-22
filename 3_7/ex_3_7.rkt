@@ -20,28 +20,29 @@
 (define (make-passworded f f-password)
   (lambda (password . z)
     (cond
-      ((and (pair? z) (eq? (car z) 'test-password))
-       (if (eq? password f-password)
-           true
-           false))       
-      ((and (eq? password f-password) (not (pair? z)))
-           f)
+      ((null? z) (eq? password f-password))
+      ((eq? password f-password) (f (car z)))
       (else (lambda _ "incorrect-password")))))
 
-(define acc-denis
-  (make-passworded (make-account 100) 'secret))
-(((acc-denis 'secret) 'withdraw) 20)
+(define (make-passworded-acc balance password)
+  (make-passworded (make-account balance) password))
+
+(define acc-denis ( make-passworded-acc 1000 'denis-secret))
+  
+
+
+((acc-denis 'denis-secret 'withdraw) 20)
+((acc-denis 'denis-secret 'withdraw) 20)
 
 (define (make-joint acc acc-password joint-password)
-  (if (acc acc-password 'test-password) 
-      (make-passworded (acc acc-password) joint-password)
+  (if (acc acc-password) 
+      (make-passworded (lambda (x) (acc acc-password x)) joint-password)
       (display "incorrect password")))
 
-(define acc-aisha
-  (make-joint acc-denis 'secret 'top-secret))
+(define acc-aisha (make-joint acc-denis 'denis-secret 'aisha-secret))
 
-(((acc-aisha 'top-secret) 'deposit) 100)
+((acc-aisha 'aisha-secret 'deposit) 500)
 
-(((acc-denis 'secret) 'deposit) 20)
+(define acc-victoria (make-joint acc-aisha 'aisha-secret 'victoria-secret))
 
-(((acc-aisha 'top-secret) 'deposit) 100)
+((acc-victoria 'victoria-secret 'deposit) 400)
