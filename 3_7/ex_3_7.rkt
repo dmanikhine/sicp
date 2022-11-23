@@ -28,16 +28,14 @@
   (make-passworded (make-account balance) password))
 
 (define acc-denis ( make-passworded-acc 1000 'denis-secret))
-  
-
 
 ((acc-denis 'denis-secret 'withdraw) 20)
 ((acc-denis 'denis-secret 'withdraw) 20)
 
-(define (make-joint acc acc-password joint-password)
-  (if (acc acc-password) 
-      (make-passworded (lambda (x) (acc acc-password x)) joint-password)
-      (display "incorrect password")))
+(define (make-joint main-acc main-password joint-password)
+  (if (main-acc main-password) 
+      (make-passworded (lambda (x) (main-acc main-password x)) joint-password)
+      (display "incorrect password for main account ")))
 
 (define acc-aisha (make-joint acc-denis 'denis-secret 'aisha-secret))
 
@@ -46,3 +44,5 @@
 (define acc-victoria (make-joint acc-aisha 'aisha-secret 'victoria-secret))
 
 ((acc-victoria 'victoria-secret 'deposit) 400)
+
+(define acc-oxana (make-joint acc-denis 'oxana-secret 'oxana-secret))
