@@ -18,7 +18,25 @@
                1))))
     (f-help x)))
 
+(define (count-pairs_v3 x)
+   (define (f-help x in-el-list)
+      (if (or (not (pair? x)) (memq x in-el-list))
+          in-el-list
+          (begin
+            (let ((out_list (cons x (f-help (car x) in-el-list))))
+              (f-help (cdr x) out_list)))))
+    (length (f-help x '())))
 
+
+;from http://community.schemewiki.org/?sicp-ex-3.17
+;Naming is very gut!!!
+ (define (count-pairs_v4 x)  
+   (define (collect-pairs x seen) 
+     (if (or (not (pair? x)) (memq x seen)) 
+         seen 
+         (let ((seen-car (collect-pairs (car x) (cons x seen)))) 
+           (collect-pairs (cdr x) seen-car)))) 
+   (length (collect-pairs x '()))) 
 
 
 
@@ -27,15 +45,17 @@
 (define test3 '(a b c))
 (count-pairs_v1 test3)
 (count-pairs_v2 test3)
+(count-pairs_v3 test3)
 
 (define p1 (cons 'a 'b))
 (define test4 (cons p1 (cons p1 'c)))
 (count-pairs_v1 test4)
 (count-pairs_v2 test4)
+(count-pairs_v3 test4)
 
 (define p2 (cons p1 p1))
 (define test7 (cons p2 p2))
 (count-pairs_v1 test7)
 (count-pairs_v2 test7)
-    
+(count-pairs_v3 test7)    
                      
