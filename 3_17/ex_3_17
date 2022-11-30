@@ -1,0 +1,41 @@
+#lang sicp
+(define (count-pairs_v1 x)
+  (if (not (pair? x))
+      0
+      (+ (count-pairs_v1 (car x))
+         (count-pairs_v1 (cdr x))
+         1)))
+
+(define (count-pairs_v2 x)
+  (let ((el_list '()))
+    (define (f-help x)
+      (if (or (not (pair? x)) (memq x el_list))
+          0
+          (begin
+            (set! el_list (cons x el_list))
+            (+ (f-help (car x))
+               (f-help (cdr x))
+               1))))
+    (f-help x)))
+
+
+
+
+
+
+
+(define test3 '(a b c))
+(count-pairs_v1 test3)
+(count-pairs_v2 test3)
+
+(define p1 (cons 'a 'b))
+(define test4 (cons p1 (cons p1 'c)))
+(count-pairs_v1 test4)
+(count-pairs_v2 test4)
+
+(define p2 (cons p1 p1))
+(define test7 (cons p2 p2))
+(count-pairs_v1 test7)
+(count-pairs_v2 test7)
+    
+                     
