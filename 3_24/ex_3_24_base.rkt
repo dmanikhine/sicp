@@ -1,23 +1,18 @@
 #lang sicp
-(define (make-table same-key?)
+(define (make-table)
   (let ((local-table (list '*table*)))
-    (define (tassoc key records)
-      (cond ((null? records) false)
-            ((same-key? key (caar records)) (car records))
-            (else (tassoc key (cdr records)))))
-    
     (define (lookup key-1 key-2)
-      (let ((subtable (tassoc key-1 (cdr local-table))))
+      (let ((subtable (assoc key-1 (cdr local-table))))
         (if subtable
-            (let ((record (tassoc key-2 (cdr subtable))))
+            (let ((record (assoc key-2 (cdr subtable))))
               (if record
                   (cdr record)
                   false))
             false)))
     (define (insert! key-1 key-2 value)
-      (let ((subtable (tassoc key-1 (cdr local-table))))
+      (let ((subtable (assoc key-1 (cdr local-table))))
         (if subtable
-            (let ((record (tassoc key-2 (cdr subtable))))
+            (let ((record (assoc key-2 (cdr subtable))))
               (if record
                   (set-cdr! record value)
                   (set-cdr! subtable (cons (cons key-2 value)
@@ -31,21 +26,17 @@
             (else (error "Unknown operation: TABLE" m))))
     dispatch))
 
-(define (predicat? test-key tbl-key)
-  (and (< (- test-key tbl-key) 5) (>= test-key tbl-key)))
+(define tbl (make-table))
 
-(predicat? 54 50)
+;((tbl 'insert-proc!) 'math '+ 43)
+;((tbl 'insert-proc!) 'letters 'a 97)
 
-(define tbl (make-table predicat?))
+;((tbl 'lookup-proc) 'math '+)
+;((tbl 'lookup-proc) 'letters 'a)
 
-((tbl 'insert-proc!) 10 10 100)
-((tbl 'insert-proc!) 20 20 400)
+((tbl 'insert-proc!) 10 10 43)
+((tbl 'insert-proc!) 20 20 97)
 
 ((tbl 'lookup-proc) 10 10)
 ((tbl 'lookup-proc) 20 20)
 
-((tbl 'lookup-proc) 12 12)
-((tbl 'lookup-proc) 22 22)
-
-((tbl 'lookup-proc) 15 15)
-((tbl 'lookup-proc) 25 25)
