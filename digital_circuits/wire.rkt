@@ -29,3 +29,16 @@
 (define (add-action! wire action-procedure)
   ((wire 'add-action!) action-procedure))
 
+(define input-1 (make-wire))
+(define input-2 (make-wire))
+(define sum (make-wire))
+(define carry (make-wire))
+
+
+
+
+
+
+
+
+
