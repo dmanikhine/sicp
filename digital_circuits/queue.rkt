@@ -1,5 +1,5 @@
 #lang sicp
-(#%provide delete-queue! empty-queue? front-queue)
+(#%provide delete-queue! empty-queue? front-queue make-queue insert-queue!)
 
 (define (front-ptr queue) (car queue))
 (define (rear-ptr queue) (cdr queue))

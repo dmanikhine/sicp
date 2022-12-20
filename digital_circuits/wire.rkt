@@ -1,4 +1,6 @@
 #lang sicp
+(#%provide add-action! get-signal make-wire set-signal!)
+
 (define (make-wire)
   (let ((signal-value 0) (action-procedures '()))
     (define (set-my-signal! new-value)
@@ -23,32 +25,10 @@
       (begin ((car procedures))
              (call-each (cdr procedures)))))
 
+
+
 (define (get-signal wire) (wire 'get-signal))
-(define (set-signal! wire new-value)
-  ((wire 'set-signal!) new-value))
-(define (add-action! wire action-procedure)
-  ((wire 'add-action!) action-procedure))
 
-(define (probe name wire)
-  (add-action! wire
-               (lambda ()
-                 (newline)
-                 (display name) (display " ")
-                 (display (current-time the-agenda))
-                 (display " New-value = ")
-                 (display (get-signal wire)))))
+(define (set-signal! wire new-value) ((wire 'set-signal!) new-value))
 
-
-(define input-1 (make-wire))
-(define input-2 (make-wire))
-(define sum (make-wire))
-(define carry (make-wire))
-
-
-
-
-
-
-
-
-
+(define (add-action! wire action-procedure)((wire 'add-action!) action-procedure))
