@@ -29,6 +29,16 @@
 (define (add-action! wire action-procedure)
   ((wire 'add-action!) action-procedure))
 
+(define (probe name wire)
+  (add-action! wire
+               (lambda ()
+                 (newline)
+                 (display name) (display " ")
+                 (display (current-time the-agenda))
+                 (display " New-value = ")
+                 (display (get-signal wire)))))
+
+
 (define input-1 (make-wire))
 (define input-2 (make-wire))
 (define sum (make-wire))
