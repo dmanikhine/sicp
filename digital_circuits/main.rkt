@@ -1,7 +1,7 @@
 #lang sicp
 (#%require "agenda.rkt")
 (#%require "wire.rkt")
-
+(#%require "components.rkt")
 
 
 
@@ -21,7 +21,7 @@
 
 (define (propogate)
   (if (empty-agenda? the-agenda)
-      'done
+      (display 'done)
       (let ((first-item (first-agenda-item the-agenda)))
         (first-item)
         (remove-first-agenda-item! the-agenda)
@@ -33,3 +33,18 @@
 (define carry (make-wire))
 
 (probe 'sum sum)
+(probe 'carry carry)
+
+(half-adder input-1 input-2 sum carry)
+
+(set-signal! input-1 1)
+
+(propogate)
+
+
+
+
+
+
+
+
