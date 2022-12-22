@@ -1,5 +1,6 @@
 #lang sicp
-(#%provide stream-car stream-cdr stream-ref stream-map stream-enumerate-interval stream-filter display-stream display-line )
+(#%provide stream-car stream-cdr stream-ref stream-map stream-map-x stream-enumerate-interval stream-filter display-stream display-line )
+
 
 (define (stream-car stream) (car stream))
 (define (stream-cdr stream) (force (cdr stream)))
@@ -14,6 +15,17 @@
       the-empty-stream
       (cons-stream (proc (stream-car s))
                    (stream-map proc (stream-cdr s)))))
+
+(define (stream-map-x proc . argstreams)
+  (if (null? (car argstreams))
+      the-empty-stream
+      (cons-stream
+       (apply proc (map stream-car argstreams))
+       (apply stream-map-x
+              (cons proc (map stream-cdr argstreams))))))
+
+
+
 
 (define (stream-for-each proc s)
   (if (stream-null? s)
@@ -36,6 +48,12 @@
                        pred
                        (stream-cdr stream))))
         (else (stream-filter pred (stream-cdr stream)))))
+
+(define (integers-starting-from n)
+  (cons-stream n (integers-starting-from (+ n 1))))
+(define integers (integers-starting-from 1))
+
+
 
 
 (define (display-line x) (newline) (display x) (newline))
