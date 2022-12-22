@@ -1,5 +1,15 @@
 #lang sicp
-(#%provide stream-car stream-cdr stream-ref stream-map stream-map-x stream-enumerate-interval stream-filter add-streams mul-streams display-stream display-line )
+(#%provide stream-car
+           stream-cdr
+           stream-ref
+           stream-map
+           stream-map-x
+           stream-enumerate-interval
+           stream-filter
+           add-streams
+           mul-streams
+           scale-stream
+           display-stream display-line )
 
 
 (define (stream-car stream) (car stream))
@@ -55,6 +65,10 @@
 
 (define (add-streams s1 s2) (stream-map-x + s1 s2))
 (define (mul-streams s1 s2) (stream-map-x * s1 s2))
+
+(define (scale-stream stream factor)
+  (stream-map (lambda (x) (* x factor))
+              stream))
 
 
 (define (display-line x) (newline) (display x) (newline))
