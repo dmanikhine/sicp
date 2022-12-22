@@ -1,4 +1,5 @@
 #lang sicp
+(#%provide stream-car stream-cdr stream-ref stream-enumerate-interval display-stream display-line )
 
 (define (stream-car stream) (car stream))
 (define (stream-cdr stream) (force (cdr stream)))
@@ -28,11 +29,11 @@
        (stream-enumerate-interval (+ low 1) high))))
 
 
-(define (display-line x) (newline) (display x))
+(define (display-line x) (newline) (display x) (newline))
 
 (define (display-stream s)
   (stream-for-each display-line s))
 
-(define s10-20 (stream-enumerate-interval 10 20))
+;(define s10-20 (stream-enumerate-interval 10 20))
 
-(display-stream s10-20)
+;(display-stream s10-20)
