@@ -1,5 +1,5 @@
 #lang sicp
-(#%provide stream-car stream-cdr stream-ref stream-enumerate-interval display-stream display-line )
+(#%provide stream-car stream-cdr stream-ref stream-map stream-enumerate-interval stream-filter display-stream display-line )
 
 (define (stream-car stream) (car stream))
 (define (stream-cdr stream) (force (cdr stream)))
@@ -27,6 +27,15 @@
       (cons-stream
        low
        (stream-enumerate-interval (+ low 1) high))))
+
+(define (stream-filter pred stream)
+  (cond ((stream-null? stream) the-empty-stream)
+        ((pred (stream-car stream))
+         (cons-stream (stream-car stream)
+                      (stream-filter
+                       pred
+                       (stream-cdr stream))))
+        (else (stream-filter pred (stream-cdr stream)))))
 
 
 (define (display-line x) (newline) (display x) (newline))
